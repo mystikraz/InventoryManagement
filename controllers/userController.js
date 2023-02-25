@@ -4,14 +4,13 @@ const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
 const Token = require("../models/tokenModels")
 const crypto = require("crypto")
-const sendEmail = require("../sendEmail")
+const sendEmail = require("../utils/sendEmail")
 
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" })
 }
 const registerUser = asyncHandler(async (req, res) => {
     const { name, email, password } = req.body
-    console.log(password)
     //validation
     if (!name || !email || !password) {
         res.status(400)
